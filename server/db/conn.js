@@ -9,4 +9,4 @@ const conn = new Sequelize(process.env.DATABASE_URL || 'postgres://localhost/gra
 
 module.exports = conn;
 
-test
+
