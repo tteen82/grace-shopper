@@ -8,3 +8,5 @@ if(process.env.QUIET){
 const conn = new Sequelize(process.env.DATABASE_URL || 'postgres://localhost/grace-shopper', config);
 
 module.exports = conn;
+
+
