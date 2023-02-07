@@ -44,3 +44,16 @@ app.get('/:id', async (req, res, next) => {
     });
   }
 });
+
+//to add one review
+app.post('/:id', async (req, res, next) => {
+  try {
+    const singleReview = await Review.create(req.body);
+    res.send(singleReview);
+  } catch (err) {
+    res.status(500).json({
+      message: 'Error adding the specific Review',
+      error: err.message,
+    });
+  }
+});
