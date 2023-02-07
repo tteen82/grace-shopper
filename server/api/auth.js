@@ -34,3 +34,13 @@ app.post('/register', async (req, res, next) => {
       .json({ message: 'Error creating the user', error: err.message });
   }
 });
+
+//updating a user
+app.put('/:id', async (req, res, next) => {
+  try {
+    await User.update(req.body, { where: { id: req.params.id } });
+    res.send(await User.findByPk(req.params.id, { include: [orders] }));
+  } catch (error) {
+    next(error);
+  }
+});
