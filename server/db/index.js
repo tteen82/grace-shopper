@@ -105,23 +105,23 @@ const syncAndSeed = async () => {
       details:
         'Pairing an ultra wide-angle focal length with an especially bright design, the FE 14mm f/1.8 GM from Sony is a fast and dynamic lens well-suited to landscape, nature, architectural, and astrophotography applications.',
     }),
-    Review.create({
-      description: 'I hate this product.  It is stupid.',
-      stars: 1,
-      productId: a7rm5.id,
-      userId: wonjun.id,
-    }),
-    Review.create({
-      description: 'Best camera ever!',
-      stars: 5,
-      productId: sel2470.id,
-      userId: doug.id,
-    })
   ]);
 
   const cart = await doug.getCart();
   await doug.addToCart({ product: a7m3, quantity: 2 });
   await doug.addToCart({ product: sel70200, quantity: 1 });
+  Review.create({
+    description: 'I hate this product.  It is stupid.',
+    stars: 1,
+    productId: a7rm5.id,
+    userId: wonjun.id,
+  }),
+    Review.create({
+      description: 'Best camera ever!',
+      stars: 5,
+      productId: sel2470.id,
+      userId: doug.id,
+    });
   return {
     users: {
       tiffany,
