@@ -10,6 +10,7 @@ LineItem.belongsTo(Order);
 Order.hasMany(LineItem);
 LineItem.belongsTo(Product);
 Review.belongsTo(User);
+Review.belongsTo(Product);
 Product.hasMany(Review);
 
 const syncAndSeed = async () => {
@@ -30,7 +31,7 @@ const syncAndSeed = async () => {
     sel24105,
     sel14,
   ] = await Promise.all([
-    User.create({ username: 'tiffany', password: '123' }),
+    User.create({ username: 'tiffany', password: '123', isAdmin: true }),
     User.create({ username: 'wonjun', password: '123' }),
     User.create({ username: 'samuel', password: '123' }),
     User.create({ username: 'doug', password: '123' }),
@@ -104,6 +105,18 @@ const syncAndSeed = async () => {
       details:
         'Pairing an ultra wide-angle focal length with an especially bright design, the FE 14mm f/1.8 GM from Sony is a fast and dynamic lens well-suited to landscape, nature, architectural, and astrophotography applications.',
     }),
+    Review.create({
+      description: 'I hate this product.  It is stupid.',
+      stars: 1,
+      productId: a7rm5.id,
+      userId: wonjun.id,
+    }),
+    Review.create({
+      description: 'Best camera ever!',
+      stars: 5,
+      productId: sel2470.id,
+      userId: doug.id,
+    })
   ]);
 
   const cart = await doug.getCart();
