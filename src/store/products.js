@@ -10,7 +10,13 @@ const products = (state = { allProducts: [], singleProduct: {} }, action) => {
     return { ...state, allProducts: [...state.allProducts, action.product] };
   }
   if (action.type === 'ADD_REVIEW') {
-    return { ...state, singleProduct: action.product };
+    return {
+      ...state,
+      allProducts: state.allProducts.map((product) =>
+        product.id === action.product.id ? action.product : product
+      ),
+      singleProduct: action.product,
+    };
   }
   return state;
 };
