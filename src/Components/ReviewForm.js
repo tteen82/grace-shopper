@@ -1,51 +1,45 @@
-import axios from 'axios';
-const products = (state = { allProducts: [], singleProduct: {} }, action) => {
-  if (action.type === 'SET_PRODUCTS') {
-    return { ...state, allProducts: action.products };
-  }
-  if (action.type === 'SINGLE_PRODUCT') {
-    return { ...state, singleProduct: action.product };
-  }
-  if (action.type === 'CREATE_PRODUCT') {
-    return { ...state, allProducts: [...state.allProducts, action.product] };
-  }
-  if (action.type === 'ADD_REVIEW') {
-    return {
-      ...state,
-      allProducts: state.allProducts.map((product) =>
-        product.id === action.product.id ? action.product : product
-      ),
-      singleProduct: action.product,
+import React from 'react';
+import { connect } from 'react-redux';
+import { addingReview } from '../store/products';
+
+class ReviewForm extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      description: '',
+      stars: 0,
     };
+    this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleChange = this.handleChange.bind(this);
   }
-  return state;
-};
 
-export const setProducts = () => {
-  return async (dispatch) => {
-    const response = await axios.get('/api/products/');
-    dispatch({ type: 'SET_PRODUCTS', products: response.data });
-  };
-};
+  handleSubmit(evt) {
+    evt.preventDefault();
+    this.props.addingReview({ ...this.state });
+  }
 
-export const singleProduct = (id) => {
-  return async (dispatch) => {
-    const response = await axios.get(`/api/products/${id}`);
-    dispatch({ type: 'SINGLE_PRODUCT', product: response.data });
-  };
-};
+  handleChange(evt) {
+    this.setState({ [evt.target.name]: evt.target.value });
+  }
 
-export const createProduct = (data) => {
-  return async (dispatch) => {
-    const response = await axios.post('/api/products/admin', data);
-    dispatch({ type: 'CREATE_PRODUCT', product: response.data });
-  };
-};
+  render() {
+    const { description, stars } = this.state;
+    const { handleSubmit, handleChange } = this;
 
-export const addingReview = (id, data) => {
-  return async (dispatch) => {
-    const response = await axios.post(`/api/products/${id}`, data);
-    dispatch({ type: 'ADD_REVIEW', product: response.data });
-  };
-};
-export default products;
+    return (
+      <form id="review-form" onSubmit={handleSubmit}>
+        <label htmlFor="stars">Stars:</label>
+        <input name="stars" value={stars} onChange={handleChange} />
+        <label htmlFor="description">description:</label>
+        <input name="description" value={description} onChange={handleChange} />
+        <button type="submit">Submit</button>
+      </form>
+    );
+  }
+}
+
+const mapDispatchToProps = (dispatch, { history }) => ({
+  addingReview: (id, data) => dispatch(addingReview(id, data, history)),
+});
+
+export default connect(null, mapDispatchToProps)(ReviewForm);

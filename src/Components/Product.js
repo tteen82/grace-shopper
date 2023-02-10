@@ -2,8 +2,8 @@ import React from 'react';
 import ReviewForm from './ReviewForm';
 
 const Product = (props) => {
-  const { product } = this.props;
-  const { name, price, imageUrl, details } = product;
+  const { name, price, imageUrl, details } = props.product;
+  console.log('thisi is props: ', props);
   return (
     <div id="product">
       <div>
@@ -12,7 +12,7 @@ const Product = (props) => {
         <img src={imageUrl} />
         <p>Description: {details}</p>
       </div>
-      <ReviewForm product={product} />
+      <ReviewForm product={props.product} />
     </div>
   );
 };
