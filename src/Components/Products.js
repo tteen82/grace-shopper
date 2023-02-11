@@ -11,18 +11,13 @@ class Products extends React.Component {
 
   render() {
     let { allProducts } = this.props.products;
-    // console.log('this.props: ', allProducts[0]);
     allProducts = allProducts || [];
     return (
       <div id="products">
         {allProducts.map((product) => (
           <div id="product" key={product.id}>
             <div>
-              <Link
-                onClick={() => singleProduct(product.id)}
-                to={`/products/${product.id}`}
-                key={product.id}
-              >
+              <Link to={`/products/${product.id}`} key={product.id}>
                 <h1>{product.name}</h1>
               </Link>
               <p>Price: {product.price}</p>
