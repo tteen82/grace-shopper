@@ -1,18 +1,31 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import ReviewForm from './ReviewForm';
+import { singleProduct } from '../store';
+import { useSelector, useDispatch } from 'react-redux';
+import { useParams } from 'react-router-dom';
 
 const Product = (props) => {
-  const { name, price, imageUrl, details } = props.product;
-  console.log('thisi is props: ', props);
+  const { products } = useSelector((state) => state);
+
+  const product = products.singleProduct;
+
+  const params = useParams();
+
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(singleProduct(params.id));
+  }, []);
+
   return (
     <div id="product">
       <div>
-        <h1>{name}</h1>
-        <p>Price: {price}</p>
-        <img src={imageUrl} />
-        <p>Description: {details}</p>
+        <h1>{product.name}</h1>
+        <p>Price: {product.price}</p>
+        <img src={product.imageUrl} />
+        <p>Description: {product.details}</p>
       </div>
-      <ReviewForm product={props.product} />
+      {/* <ReviewForm product={props.product} /> */}
     </div>
   );
 };
