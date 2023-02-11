@@ -34,7 +34,7 @@ app.get('/:id', async (req, res, next) => {
   try {
     //uncomment the next line when the review model has been added and created
     const singleProduct = await Product.findByPk(req.params.id, {
-      include: [Reviews],
+      include: Review,
     });
     res.send(singleProduct);
   } catch (err) {

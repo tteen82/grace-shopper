@@ -30,8 +30,12 @@ export const setProducts = () => {
 
 export const singleProduct = (id) => {
   return async (dispatch) => {
-    const response = await axios.get(`/api/products/${id}`);
-    dispatch({ type: 'SINGLE_PRODUCT', product: response.data });
+    try {
+      const response = await axios.get(`/api/products/${id}`);
+      dispatch({ type: 'SINGLE_PRODUCT', product: response.data });
+    } catch (error) {
+      console.log('could not get th e product error is -->', error);
+    }
   };
 };
 
