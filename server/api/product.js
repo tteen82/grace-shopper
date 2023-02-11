@@ -1,6 +1,6 @@
 const express = require('express');
 const app = express.Router();
-const { Product, Review } = require('../db');
+const { Product } = require('../db');
 
 module.exports = app;
 
@@ -33,26 +33,11 @@ app.post('/admin', async (req, res, next) => {
 app.get('/:id', async (req, res, next) => {
   try {
     //uncomment the next line when the review model has been added and created
-    const singleProduct = await Product.findByPk(req.params.id, {
-      include: [Reviews],
-    });
+    const singleProduct = await Product.findByPk(req.params.id);
     res.send(singleProduct);
   } catch (err) {
     res.status(500).json({
       message: 'Error getting the info for the specific product',
-      error: err.message,
-    });
-  }
-});
-
-//to add one review
-app.post('/:id', async (req, res, next) => {
-  try {
-    const singleReview = await Review.create(req.body);
-    res.send(singleReview);
-  } catch (err) {
-    res.status(500).json({
-      message: 'Error adding the specific Review',
       error: err.message,
     });
   }

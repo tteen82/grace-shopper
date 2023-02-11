@@ -7,7 +7,8 @@ const Cart = () => {
   const { cart } = useSelector((state) => state);
   const dispatch = useDispatch();
 
-  const items = cart.lineItems;
+  let items = cart.lineItems;
+  items = items || [];
   let totalPrice = 0;
   return (
     <div>

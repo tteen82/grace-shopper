@@ -1,8 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import Product from './Product';
-import { setProducts } from '../store';
+import ProductCard from './ProductCards';
+import { setProducts, addToCart } from '../store';
 
 class Products extends React.Component {
   componentDidMount() {
@@ -10,29 +10,27 @@ class Products extends React.Component {
   }
 
   render() {
+    const { addToCart } = this.props;
     let { allProducts } = this.props.products;
-    console.log('this.props: ', allProducts[0]);
     allProducts = allProducts || [];
     return (
       <div id="products">
         {allProducts.map((product) => (
-          <Link to={`/products/${product.id}`} key={product.id}>
-            <Product product={product} />
-          </Link>
+          <div key={product.id}>
+            <ProductCard product={product} addToCart={addToCart} />
+          </div>
         ))}
       </div>
     );
   }
 }
-const mapStateToProps = (state) => {
-  return {
-    products: state.products,
-  };
-};
 const mapDispatchToProps = (dispatch) => ({
   setProducts: () => {
     dispatch(setProducts());
   },
+  addToCart: (product, quantity) => {
+    dispatch(addToCart(product, quantity));
+  },
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(Products);
+export default connect((state) => state, mapDispatchToProps)(Products);
