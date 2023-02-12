@@ -7,10 +7,10 @@ const cart = (state = [], action) => {
     return action.cart;
   }
   if (action.type === 'DELETE_CART') {
-    const newLineItems = state.lineItems.filter(
-      (item) => item.id !== action.item.id
-    );
-    return newLineItems;
+    return action.cart;
+  }
+  if (action.type === 'CREATE_ORDER') {
+    return [];
   }
   return state;
 };
@@ -38,17 +38,19 @@ export const addToCart = (product) => {
 };
 
 //Remove from the cart
-export const removeFromCart = (product, quantityToRemove) => {
+export const removeFromCart = (id) => {
   return async (dispatch) => {
     const token = window.localStorage.getItem('token');
-    const response = await axios.put('/api/orders/cart', {
-      headers: {
-        authorization: token,
-      },
-      product,
-      quantityToRemove,
-    });
+    const response = await axios.put('/api/orders/cart', { token, id });
     dispatch({ type: 'DELETE_CART', cart: response.data });
+  };
+};
+
+export const createOrder = () => {
+  return async (dispatch) => {
+    const token = window.localStorage.getItem('token');
+    const response = await axios.post('/api/orders', { token });
+    dispatch({ type: 'CREATE_ORDER' });
   };
 };
 

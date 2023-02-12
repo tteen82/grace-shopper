@@ -1,6 +1,6 @@
 const express = require('express');
 const app = express.Router();
-const { User, orders } = require('../db');
+const { User, Order } = require('../db');
 
 module.exports = app;
 
@@ -17,7 +17,7 @@ app.post('/', async (req, res, next) => {
 app.get('/', async (req, res, next) => {
   try {
     res.send(
-      await User.findByToken(req.headers.authorization, { include: [orders] })
+      await User.findByToken(req.headers.authorization, { include: [Order] })
     );
   } catch (ex) {
     next(ex);

@@ -6,10 +6,12 @@ const LineItem = require('./LineItem');
 const Review = require('./Review');
 
 Order.belongsTo(User);
+User.hasMany(Order);
 LineItem.belongsTo(Order);
 Order.hasMany(LineItem);
 LineItem.belongsTo(Product);
 Review.belongsTo(User);
+Review.hasMany(User);
 Review.belongsTo(Product);
 Product.hasMany(Review);
 
@@ -111,14 +113,14 @@ const syncAndSeed = async () => {
   await doug.addToCart({ product: a7m3, quantity: 2 });
   await doug.addToCart({ product: sel70200, quantity: 1 });
   Review.create({
-    description: 'I hate this product.  It is stupid.',
-    stars: 1,
+    comment: 'I hate this product.  It is stupid.',
+    stars: '⭐️',
     productId: a7rm5.id,
     userId: wonjun.id,
   }),
     Review.create({
-      description: 'Best camera ever!',
-      stars: 5,
+      comment: 'Best camera ever!',
+      stars: '⭐️⭐️⭐️⭐️⭐️',
       productId: sel2470.id,
       userId: doug.id,
     });
@@ -149,4 +151,5 @@ module.exports = {
   User,
   Product,
   Review,
+  Order,
 };
