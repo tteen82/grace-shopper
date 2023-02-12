@@ -2,6 +2,8 @@ import React, { useEffect } from 'react';
 import Home from './Home';
 import Cart from './Carts';
 import Product from './Product';
+import Login from './Login';
+import Products from './Products';
 import { useSelector, useDispatch } from 'react-redux';
 import { loginWithToken, fetchCart } from '../store';
 
@@ -26,7 +28,6 @@ const App = () => {
   }, [auth]);
   return (
     <div>
-
       <h1>Acme Shopping</h1>
       {auth.id ? <Home /> : <Login />}
       {!!auth.id && (
@@ -43,15 +44,14 @@ const App = () => {
         </div>
       )}
 
-/*
+      {/* 
       <h1>Acme Shopping insert navbar here</h1>
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/cart" element={<Cart />} />
         <Route path="/products/:id" element={<Product />} />
       </Routes>
-      */
-
+       */}
     </div>
   );
 };
