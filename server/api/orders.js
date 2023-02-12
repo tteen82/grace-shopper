@@ -6,7 +6,8 @@ module.exports = app;
 
 app.post('/', async (req, res, next) => {
   try {
-    const user = await User.findByToken(req.headers.authorization);
+    const { token } = req.body;
+    const user = await User.findByToken(token);
     res.send(await user.createOrder());
   } catch (ex) {
     next(ex);
@@ -34,8 +35,9 @@ app.post('/cart', async (req, res, next) => {
 
 app.put('/cart', async (req, res, next) => {
   try {
-    const user = await User.findByToken(req.headers.authorization);
-    res.send(await user.removeFromCart(req.body));
+    const { token, id } = req.body;
+    const user = await User.findByToken(token);
+    res.send(await user.removeFromCart({ id, quantityToRemove: 1 }));
   } catch (ex) {
     next(ex);
   }

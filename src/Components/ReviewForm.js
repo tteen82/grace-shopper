@@ -6,19 +6,19 @@ class ReviewForm extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      description: '',
-      stars: 0,
+      comment: '',
+      stars: '⭐️',
     };
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleChange = this.handleChange.bind(this);
   }
   componentDidMount() {
-    console.log(this.props);
     this.props.setReviews(this.props.id);
   }
   handleSubmit(evt) {
     evt.preventDefault();
     this.props.addingReview(this.props.id, this.props.auth.id, this.state);
+    this.setState({ comment: '', stars: '⭐️' });
   }
 
   handleChange(evt) {
@@ -26,34 +26,40 @@ class ReviewForm extends React.Component {
   }
 
   render() {
-    const { description, stars } = this.state;
+    const { comment, stars } = this.state;
     const { handleSubmit, handleChange } = this;
     let reviews = this.props.reviews || [];
-
     return (
       <div>
         <div>
           <ul>
             {reviews.map((review) => (
               <li key={review.id}>
+                from: {review.user.username || 'An'}
+                <br />
                 rating : {review.stars}
                 <br />
-                description : {review.description}
+                comment : {review.comment}
               </li>
             ))}
           </ul>
         </div>
-        <form id="review-form" onSubmit={handleSubmit}>
-          <label htmlFor="stars">Stars:</label>
-          <input name="stars" value={stars} onChange={handleChange} />
-          <label htmlFor="description">description:</label>
-          <input
-            name="description"
-            value={description}
-            onChange={handleChange}
-          />
-          <button type="submit">Submit</button>
-        </form>
+        <div id="review-form">
+          <h1> Reviews</h1>
+          <form onSubmit={handleSubmit}>
+            <label htmlFor="stars">Stars:</label>
+            <select name="stars" onChange={handleChange}>
+              <option value="⭐️">⭐️</option>
+              <option value="⭐️⭐️">⭐️⭐️</option>
+              <option value="⭐️⭐️⭐️">⭐️⭐️⭐️</option>
+              <option value="⭐️⭐️⭐️⭐️">⭐️⭐️⭐️⭐️</option>
+              <option value="⭐️⭐️⭐️⭐️⭐️">⭐️⭐️⭐️⭐️⭐️</option>
+            </select>
+            <label htmlFor="description">Comment:</label>
+            <input name="comment" value={comment} onChange={handleChange} />
+            <button type="submit">Submit</button>
+          </form>
+        </div>
       </div>
     );
   }

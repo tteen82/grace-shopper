@@ -17,28 +17,6 @@ const Order = conn.define('order', {
     type: UUID,
     allowNull: false,
   },
-  // shippingAddress: {
-  //   type: STRING,
-  //   allowNull: false,
-  //   validate: {
-  //     notEmpty: true
-  //   }
-  // },
-  // billingAddress: {
-  //   type: STRING,
-  //   allowNull: false,
-  //   validate: {
-  //     notEmpty: true
-  //   }
-  // },
-  // ccNumber: {
-  //   type: INTEGER,
-  //   validate: {
-  //     min: 16,
-  //     max: 16,
-  //     isCreditCard: true,
-  //   }
-  // },
 });
 
 module.exports = Order;

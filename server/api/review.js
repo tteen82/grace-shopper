@@ -1,14 +1,14 @@
 const express = require('express');
 const app = express.Router();
-const { Review } = require('../db');
+const { Review, User } = require('../db');
 
 module.exports = app;
 
 app.get('/:id', async (req, res, next) => {
   try {
-    console.log(req.params.id);
     const reviews = await Review.findAll({
       where: { productId: req.params.id },
+      include: [User],
     });
     res.send(reviews);
   } catch (err) {
@@ -26,7 +26,10 @@ app.post('/:productId/:userId', async (req, res, next) => {
       productId: req.params.productId,
       userId: req.params.userId,
     };
-    const newReview = await Review.create(data);
+    const newEntry = await Review.create(data);
+    const newReview = await Review.findByPk(newEntry.id, {
+      include: [User],
+    });
     res.send(newReview);
   } catch (err) {
     res.status(500).json({
