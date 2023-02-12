@@ -1,11 +1,10 @@
 import React, { useEffect } from 'react';
 import Home from './Home';
-import Login from './Login';
 import Cart from './Carts';
-import Products from './Products';
 import Product from './Product';
 import { useSelector, useDispatch } from 'react-redux';
 import { loginWithToken, fetchCart } from '../store';
+
 import { Link, Switch, Route } from 'react-router-dom';
 
 const App = () => {
@@ -14,6 +13,7 @@ const App = () => {
   let quantities = cart.lineItems
     .map((item) => item.quantity)
     .reduce((a, b) => a + b, 0);
+
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(loginWithToken());
@@ -26,6 +26,7 @@ const App = () => {
   }, [auth]);
   return (
     <div>
+
       <h1>Acme Shopping</h1>
       {auth.id ? <Home /> : <Login />}
       {!!auth.id && (
@@ -41,6 +42,16 @@ const App = () => {
           </Switch>
         </div>
       )}
+
+/*
+      <h1>Acme Shopping insert navbar here</h1>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/cart" element={<Cart />} />
+        <Route path="/products/:id" element={<Product />} />
+      </Routes>
+      */
+
     </div>
   );
 };
