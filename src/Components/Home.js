@@ -20,7 +20,13 @@ const Home = () => {
         <Login />
       )}
       <h1>Home</h1>
-      <Products />
+      <div>
+        Welcome {auth.username}!!
+        <button onClick={() => dispatch(logout())}>Logout</button>
+      </div>
+
+      //<Products />
+
     </div>
   );
 };

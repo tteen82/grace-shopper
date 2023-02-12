@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { addingReview } from '../store/products';
+import { addingReview, setReviews } from '../store';
 
 class ReviewForm extends React.Component {
   constructor(props) {
@@ -12,10 +12,13 @@ class ReviewForm extends React.Component {
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleChange = this.handleChange.bind(this);
   }
-
+  componentDidMount() {
+    console.log(this.props);
+    this.props.setReviews(this.props.id);
+  }
   handleSubmit(evt) {
     evt.preventDefault();
-    this.props.addingReview({ ...this.state });
+    this.props.addingReview(this.props.id, this.props.auth.id, this.state);
   }
 
   handleChange(evt) {
@@ -25,21 +28,41 @@ class ReviewForm extends React.Component {
   render() {
     const { description, stars } = this.state;
     const { handleSubmit, handleChange } = this;
+    let reviews = this.props.reviews || [];
 
     return (
-      <form id="review-form" onSubmit={handleSubmit}>
-        <label htmlFor="stars">Stars:</label>
-        <input name="stars" value={stars} onChange={handleChange} />
-        <label htmlFor="description">description:</label>
-        <input name="description" value={description} onChange={handleChange} />
-        <button type="submit">Submit</button>
-      </form>
+      <div>
+        <div>
+          <ul>
+            {reviews.map((review) => (
+              <li key={review.id}>
+                rating : {review.stars}
+                <br />
+                description : {review.description}
+              </li>
+            ))}
+          </ul>
+        </div>
+        <form id="review-form" onSubmit={handleSubmit}>
+          <label htmlFor="stars">Stars:</label>
+          <input name="stars" value={stars} onChange={handleChange} />
+          <label htmlFor="description">description:</label>
+          <input
+            name="description"
+            value={description}
+            onChange={handleChange}
+          />
+          <button type="submit">Submit</button>
+        </form>
+      </div>
     );
   }
 }
 
-const mapDispatchToProps = (dispatch, { history }) => ({
-  addingReview: (id, data) => dispatch(addingReview(id, data, history)),
+const mapDispatchToProps = (dispatch) => ({
+  addingReview: (productId, userId, data) =>
+    dispatch(addingReview(productId, userId, data)),
+  setReviews: (id) => dispatch(setReviews(id)),
 });
 
-export default connect(null, mapDispatchToProps)(ReviewForm);
+export default connect((state) => state, mapDispatchToProps)(ReviewForm);

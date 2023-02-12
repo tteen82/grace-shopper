@@ -9,15 +9,7 @@ const products = (state = { allProducts: [], singleProduct: {} }, action) => {
   if (action.type === 'CREATE_PRODUCT') {
     return { ...state, allProducts: [...state.allProducts, action.product] };
   }
-  if (action.type === 'ADD_REVIEW') {
-    return {
-      ...state,
-      allProducts: state.allProducts.map((product) =>
-        product.id === action.product.id ? action.product : product
-      ),
-      singleProduct: action.product,
-    };
-  }
+
   return state;
 };
 
@@ -46,10 +38,4 @@ export const createProduct = (data) => {
   };
 };
 
-export const addingReview = (id, data) => {
-  return async (dispatch) => {
-    const response = await axios.post(`/api/products/${id}`, data);
-    dispatch({ type: 'ADD_REVIEW', product: response.data });
-  };
-};
 export default products;

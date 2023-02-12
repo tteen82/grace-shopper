@@ -1,16 +1,16 @@
 import axios from 'axios';
-const cart = (state = { lineItems: [] }, action) => {
+const cart = (state = [], action) => {
   if (action.type === 'SET_CART') {
-    return { ...state, lineItems: action.cart };
+    return action.cart;
   }
   if (action.type === 'ADD_CART') {
-    return { ...state, lineItems: [...state.lineItems, action.cart] };
+    return action.cart;
   }
   if (action.type === 'DELETE_CART') {
     const newLineItems = state.lineItems.filter(
       (item) => item.id !== action.item.id
     );
-    return { ...state, lineItems: [...newLineItems] };
+    return newLineItems;
   }
   return state;
 };
@@ -29,16 +29,10 @@ export const fetchCart = () => {
 };
 
 //add to the cart
-export const addToCart = (product, quantity) => {
+export const addToCart = (product) => {
   return async (dispatch) => {
     const token = window.localStorage.getItem('token');
-    const response = await axios.post('/api/orders/cart/', {
-      headers: {
-        authorization: token,
-      },
-      product,
-      quantity,
-    });
+    const response = await axios.post('/api/orders/cart', { token, product });
     dispatch({ type: 'ADD_CART', cart: response.data });
   };
 };
@@ -47,7 +41,7 @@ export const addToCart = (product, quantity) => {
 export const removeFromCart = (product, quantityToRemove) => {
   return async (dispatch) => {
     const token = window.localStorage.getItem('token');
-    const response = await axios.put('/api/orders/cart/', {
+    const response = await axios.put('/api/orders/cart', {
       headers: {
         authorization: token,
       },

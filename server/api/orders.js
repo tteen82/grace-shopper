@@ -24,8 +24,9 @@ app.get('/cart', async (req, res, next) => {
 
 app.post('/cart', async (req, res, next) => {
   try {
-    const user = await User.findByToken(req.headers.authorization);
-    res.send(await user.addToCart(req.body));
+    const { token, product } = req.body;
+    const user = await User.findByToken(token);
+    res.send(await user.addToCart({ product, quantity: 1 }));
   } catch (ex) {
     next(ex);
   }

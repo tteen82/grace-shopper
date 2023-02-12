@@ -148,4 +148,5 @@ module.exports = {
   syncAndSeed,
   User,
   Product,
+  Review,
 };

@@ -4,11 +4,15 @@ import Cart from './Carts';
 import Product from './Product';
 import { useSelector, useDispatch } from 'react-redux';
 import { loginWithToken, fetchCart } from '../store';
-import { Link, Routes, Route } from 'react-router-dom';
-import { setProducts } from '../store';
+
+import { Link, Switch, Route } from 'react-router-dom';
 
 const App = () => {
-  const { auth } = useSelector((state) => state);
+  const { auth, cart } = useSelector((state) => state);
+  cart.lineItems = cart.lineItems || [];
+  let quantities = cart.lineItems
+    .map((item) => item.quantity)
+    .reduce((a, b) => a + b, 0);
 
   const dispatch = useDispatch();
   useEffect(() => {
@@ -22,12 +26,32 @@ const App = () => {
   }, [auth]);
   return (
     <div>
+
+      <h1>Acme Shopping</h1>
+      {auth.id ? <Home /> : <Login />}
+      {!!auth.id && (
+        <div>
+          <nav>
+            <Link to="/">Home</Link>
+            <Link to="/cart">Cart({quantities})</Link>
+          </nav>
+          <Switch>
+            <Route exact path="/" component={Products} />
+            <Route path="/products/:id" component={Product} />
+            <Route path="/cart" component={Cart} />
+          </Switch>
+        </div>
+      )}
+
+/*
       <h1>Acme Shopping insert navbar here</h1>
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/cart" element={<Cart />} />
         <Route path="/products/:id" element={<Product />} />
       </Routes>
+      */
+
     </div>
   );
 };

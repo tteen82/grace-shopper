@@ -5,6 +5,7 @@ app.use(express.json());
 
 app.use('/dist', express.static(path.join(__dirname, '../dist')));
 app.use('/static', express.static(path.join(__dirname, '../static')));
+app.use(express.static(path.join(__dirname, '..', 'static')));
 
 app.get('/', (req, res) =>
   res.sendFile(path.join(__dirname, '../static/index.html'))
@@ -13,5 +14,6 @@ app.get('/', (req, res) =>
 app.use('/api/auth', require('./api/auth'));
 app.use('/api/orders', require('./api/orders'));
 app.use('/api/products', require('./api/product'));
+app.use('/api/reviews', require('./api/review'));
 
 module.exports = app;
