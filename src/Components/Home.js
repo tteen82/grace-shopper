@@ -25,8 +25,7 @@ const Home = () => {
         <button onClick={() => dispatch(logout())}>Logout</button>
       </div>
 
-      //<Products />
-
+      {/* <Products /> */}
     </div>
   );
 };
