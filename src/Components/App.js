@@ -29,20 +29,20 @@ const App = () => {
   return (
     <div>
       <h1>Acme Shopping</h1>
+      <nav>
+        <Link to="/">Home</Link>
+        <Link to="/cart">Cart({quantities})</Link>
+      </nav>
       {auth.id ? <Home /> : <Login />}
-      {!!auth.id && (
-        <div>
-          <nav>
-            <Link to="/">Home</Link>
-            <Link to="/cart">Cart({quantities})</Link>
-          </nav>
-          <Switch>
-            <Route exact path="/" component={Products} />
-            <Route path="/products/:id" component={Product} />
-            <Route path="/cart" component={Cart} />
-          </Switch>
-        </div>
-      )}
+      {/* {!!auth.id && ( */}
+      <div>
+        <Switch>
+          <Route exact path="/" component={Products} />
+          <Route path="/products/:id" component={Product} />
+          <Route path="/cart" component={Cart} />
+        </Switch>
+      </div>
+      {/* )} */}
 
       {/* 
       <h1>Acme Shopping insert navbar here</h1>
