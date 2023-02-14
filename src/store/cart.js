@@ -12,6 +12,9 @@ const cart = (state = [], action) => {
   if (action.type === 'CREATE_ORDER') {
     return [];
   }
+  if (action.type === 'EMPTY_CART') {
+    return [];
+  }
   return state;
 };
 
@@ -51,6 +54,12 @@ export const createOrder = () => {
     const token = window.localStorage.getItem('token');
     const response = await axios.post('/api/orders', { token });
     dispatch({ type: 'CREATE_ORDER' });
+  };
+};
+
+export const emptyCart = () => {
+  return async (dispatch) => {
+    dispatch({ type: 'EMPTY_CART' });
   };
 };
 
