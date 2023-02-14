@@ -1,6 +1,6 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { logout } from '../store';
+import { logout, emptyCart } from '../store';
 import Products from './Products';
 import Login from './Login';
 
@@ -13,7 +13,14 @@ const Home = () => {
         <div>
           <div>
             Welcome {auth.username}!!
-            <button onClick={() => dispatch(logout())}>Logout</button>
+            <button
+              onClick={() => {
+                dispatch(logout());
+                dispatch(emptyCart());
+              }}
+            >
+              Logout
+            </button>
           </div>
         </div>
       ) : (
