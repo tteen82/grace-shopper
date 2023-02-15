@@ -21,13 +21,32 @@ const Navbar = () => {
       dispatch(fetchCart());
     }
   }, [auth]);
+  //   const modal = document.getElementById('myModal');
+
+  //   // Get the button that opens the modal
+  //   const btn = document.getElementById('myBtn');
+
+  //   // Get the <span> element that closes the modal
+  //   //   const span = document.getElementsByClassName('close')[0];
+
+  //   // When the user clicks the button, open the modal
+  //   function modalbutton() {
+  //     modal.style.display = 'block';
+  //   }
+
+  // When the user clicks on <span> (x), close the modal
+  //   span.onclick = function () {
+  //     modal.style.display = 'none';
+  //   };
   return (
     <div id="navbar">
-      {auth.id ? <Home /> : <Login />}
-      <h1>Acme Shopping</h1>
-      <Link to="/">Home</Link>
+      <Link to="/">Acme Shopping</Link>
       <Link to="/cart">Cart({quantities})</Link>
-      <Link to="/account/:id">Account</Link>
+      {/* <Link to="/account/:id">Account</Link> */}
+      {/* <button id="myBtn" onClick={modalbutton()}>
+        Open Modal
+      </button> */}
+      {auth.id ? <Home /> : <Login />}
     </div>
   );
 };
