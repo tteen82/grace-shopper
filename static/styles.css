@@ -2,6 +2,9 @@
   font-family: verdana;
 }
 
+#navbar {
+  background-color: yellow;
+}
 form {
   display: flex;
   flex-direction: column;

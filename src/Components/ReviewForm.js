@@ -26,6 +26,7 @@ class ReviewForm extends React.Component {
   }
 
   render() {
+    console.log('this is props', this.props);
     const { comment, stars } = this.state;
     const { handleSubmit, handleChange } = this;
     let reviews = this.props.reviews || [];
