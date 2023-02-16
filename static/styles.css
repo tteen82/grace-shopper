@@ -66,6 +66,7 @@ nav {
   justify-content: space-around;
   padding: 2rem;
 }
+
 #singleProduct {
   display: flex;
   flex-direction: column;
@@ -74,4 +75,8 @@ nav {
 }
 .singleImage {
   width: 300px;
+}
+
+ul {
+  list-style-type: none;
 }

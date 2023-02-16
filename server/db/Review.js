@@ -15,7 +15,7 @@ const Review = conn.define('review', {
     },
   },
   stars: {
-    type: STRING,
+    type: INTEGER,
   },
 });
 

@@ -19,7 +19,6 @@ import { Link } from 'react-router-dom';
           </div>
 */
 
-
 const Home = () => {
   const { auth } = useSelector((state) => state);
   const dispatch = useDispatch();
@@ -27,11 +26,16 @@ const Home = () => {
     <div>
       {auth.id ? (
         <div>
-
           <Link to="/account/:id">{auth.username.toUpperCase()}</Link>
 
-          <button onClick={() => dispatch(logout())}>Logout</button>
-
+          <button
+            onClick={() => {
+              dispatch(logout());
+              dispatch(emptyCart());
+            }}
+          >
+            Logout
+          </button>
         </div>
       ) : (
         <Login />
