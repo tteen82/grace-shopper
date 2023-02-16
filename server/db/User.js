@@ -2,7 +2,9 @@ const conn = require('./conn');
 const { STRING, BOOLEAN, UUID, UUIDV4 } = conn.Sequelize;
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
+require('dotenv').config();
 const JWT = process.env.JWT;
+
 
 const User = conn.define('user', {
   id: {

@@ -1,6 +1,11 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { removeFromCart, createOrder } from '../store';
+import TextField from '@mui/material/TextField';
+import Box from '@mui/material/Box';
+import Button from '@mui/material/Button';
+import DeleteIcon from '@mui/icons-material/Delete';
+
 
 class Cart extends React.Component {
   constructor(props) {
@@ -34,8 +39,12 @@ class Cart extends React.Component {
 
   handleChange(evt) {
     this.setState({ [evt.target.name]: evt.target.value });
+    console.log(this.state);
   }
+
+
   render() {
+    console.log('test')
     const { cart } = this.props;
     const { handleClick, handleSubmit, handleChange } = this;
     const { ccNumber, address, name } = this.state;
@@ -52,9 +61,9 @@ class Cart extends React.Component {
               <li key={item.id}>
                 {item.product.name} Quantity : {item.quantity} Price : $
                 {item.product.price}
-                <button value={item.product.id} onClick={handleClick}>
-                  X
-                </button>
+                <Button variant="contained" value={item.product.id} onClick={handleClick} endIcon={<DeleteIcon />}>
+                  Delete
+                </Button>
               </li>
             );
           })}
@@ -62,21 +71,33 @@ class Cart extends React.Component {
         <h1>Total Price: ${totalPrice}</h1>
         <div id="orderForm">
           <h1> Check Out</h1>
+          <Box
+          component="form"
+          sx={{
+          '& .MuiTextField-root': { m: 1, width: '25ch' },
+          }}
+          noValidate
+          autoComplete="off"
+          >
           <form id="order-form" onSubmit={handleSubmit}>
-            <label htmlFor="ccNumber">CreditCard Number:</label>
-            <input name="ccNumber" value={ccNumber} onChange={handleChange} />
-            <label htmlFor="name">Name:</label>
-            <input name="name" value={name} onChange={handleChange} />
-            <label htmlFor="address">Address:</label>
-            <input name="address" value={address} onChange={handleChange} />
-            <button type="submit">Submit</button>
+            {/* <label htmlFor="ccNumber">Credit Card Number:</label>
+            <input name="ccNumber" value={ccNumber} onChange={handleChange} /> */}
+            <TextField label="Credit Card Number:" onChange={handleChange} value={ccNumber} name="ccNumber" type="text"/>
+            <TextField label="Name:" onChange={handleChange} value={name} name="name" type="text"/>
+            {/* <label htmlFor="name">Name:</label>
+            <input name="name" value={name} onChange={handleChange} /> */}
+            <TextField label="Address:" onChange={handleChange} value={address} name="address" type="text"/>
+            {/* <label htmlFor="address">Address:</label>
+            <input name="address" value={address} onChange={handleChange} /> */}
           </form>
+          </Box>
+          <Button variant="contained" type="submit">Submit</Button>
         </div>
       </div>
     );
   }
 }
-
+  
 const mapDispatchToProps = (dispatch) => ({
   removeFromCart: (data) => {
     dispatch(removeFromCart(data));
