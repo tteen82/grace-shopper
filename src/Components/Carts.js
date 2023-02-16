@@ -12,7 +12,6 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
-import { FormControl } from '@mui/material';
 
 
 class Cart extends React.Component {
@@ -149,7 +148,7 @@ class Cart extends React.Component {
           noValidate
           autoComplete="off"
           >
-          <form id="order-form" onSubmit={handleSubmit}>
+          <form id="order-form">
             {/* <label htmlFor="ccNumber">Credit Card Number:</label>
             <input name="ccNumber" value={ccNumber} onChange={handleChange} /> */}
             <TextField label="Credit Card Number:" onChange={handleChange} value={ccNumber} name="ccNumber" type="text"/>
@@ -161,7 +160,7 @@ class Cart extends React.Component {
             <input name="address" value={address} onChange={handleChange} /> */}
           </form>
           </Box>
-          <Button variant="contained" type="submit">Submit</Button>
+          <Button variant="contained" onClick={handleSubmit}>Submit</Button>
         </div>
       </div>
     );
