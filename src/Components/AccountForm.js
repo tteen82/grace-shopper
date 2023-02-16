@@ -20,7 +20,7 @@ class AccountForm extends React.Component {
 
   handleSubmit(evt) {
     evt.preventDefault();
-    this.props.updateAuth(this.props.auth.id, this.props.auth);
+    this.props.updateAuth(this.props.auth.id, this.state);
   }
   handleChange(evt) {
     this.setState({ [evt.target.name]: evt.target.value });
