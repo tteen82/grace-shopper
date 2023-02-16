@@ -24,22 +24,24 @@ class Account extends React.Component {
 
     return (
       <div>
-        <div>USER INFO HERE</div>
+        <div>
+        <h2>User Information</h2>
         <div>Name : {username}</div>
         <div>password: {password}</div>
+        <hr></hr>
+        </div>
 
-        <div>YOUR ORDERS ARE HERE</div>
+        <h2>Previous Orders</h2>
         {orders.map((order) => {
           return (
             <div key={order.id}>
-              <div>--</div>
-              <div>ORDER NUMBER: {order.id}</div>
-              <div>--</div>
+              <div>Order Number: {order.id}</div>
             </div>
           );
         })}
+        <div><hr></hr></div>
         {isAdmin ? <div>ADMIN INFO HERE</div> : <div></div>}
-        <div id="test"> TEST DIV</div>
+        {/* <div id="test"> TEST DIV</div> */}
         <AccountForm />
       </div>
     );

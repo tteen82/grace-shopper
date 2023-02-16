@@ -42,7 +42,6 @@ app.put('/:id', async (req, res, next) => {
     console.log('herss req.body', req.body);
     req.body.password = await bcrypt.hash(req.body.password, 5);
     await User.update(req.body, { where: { id: req.params.id } });
-
     res.send(await User.findByPk(req.params.id, { include: [Order] }));
   } catch (error) {
     console.log('Could not update the user ', error);
