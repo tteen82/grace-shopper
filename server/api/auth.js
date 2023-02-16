@@ -39,7 +39,7 @@ app.post('/register', async (req, res, next) => {
 app.put('/:id', async (req, res, next) => {
   try {
     await User.update(req.body, { where: { id: req.params.id } });
-    res.send(await User.findByPk(req.params.id, { include: [orders] }));
+    res.send(await User.findByPk(req.params.id, { include: [Orders] }));
   } catch (error) {
     console.log('Could not update the user ', error);
     next(error);

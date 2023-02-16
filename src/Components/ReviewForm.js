@@ -33,10 +33,11 @@ class ReviewForm extends React.Component {
     return (
       <div>
         <div>
+          <h1> Reviews</h1>
           <ul>
             {reviews.map((review) => (
               <li key={review.id}>
-                from: {review.user.username || 'An'}
+                from: {review.user.username}
                 <br />
                 rating : {review.stars}
                 <br />
@@ -45,22 +46,26 @@ class ReviewForm extends React.Component {
             ))}
           </ul>
         </div>
-        <div id="review-form">
-          <h1> Reviews</h1>
-          <form onSubmit={handleSubmit}>
-            <label htmlFor="stars">Stars:</label>
-            <select name="stars" onChange={handleChange}>
-              <option value="⭐️">⭐️</option>
-              <option value="⭐️⭐️">⭐️⭐️</option>
-              <option value="⭐️⭐️⭐️">⭐️⭐️⭐️</option>
-              <option value="⭐️⭐️⭐️⭐️">⭐️⭐️⭐️⭐️</option>
-              <option value="⭐️⭐️⭐️⭐️⭐️">⭐️⭐️⭐️⭐️⭐️</option>
-            </select>
-            <label htmlFor="description">Comment:</label>
-            <input name="comment" value={comment} onChange={handleChange} />
-            <button type="submit">Submit</button>
-          </form>
-        </div>
+        {this.props.auth.id ? (
+          <div id="review-form">
+            <h1> Adding Reviews</h1>
+            <form onSubmit={handleSubmit}>
+              <label htmlFor="stars">Stars:</label>
+              <select name="stars" onChange={handleChange}>
+                <option value="⭐️">⭐️</option>
+                <option value="⭐️⭐️">⭐️⭐️</option>
+                <option value="⭐️⭐️⭐️">⭐️⭐️⭐️</option>
+                <option value="⭐️⭐️⭐️⭐️">⭐️⭐️⭐️⭐️</option>
+                <option value="⭐️⭐️⭐️⭐️⭐️">⭐️⭐️⭐️⭐️⭐️</option>
+              </select>
+              <label htmlFor="description">Comment:</label>
+              <input name="comment" value={comment} onChange={handleChange} />
+              <button type="submit">Submit</button>
+            </form>
+          </div>
+        ) : (
+          ''
+        )}
       </div>
     );
   }
