@@ -8,6 +8,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { loginWithToken, fetchCart } from '../store';
 import Account from './Account';
 import Navbar from './Navbar';
+import Nav2 from './Navbar2';
 
 import { Link, Switch, Route } from 'react-router-dom';
 
@@ -33,6 +34,7 @@ const App = () => {
       {/* <h1>Acme Shopping</h1> */}
       {/* {auth.id ? <Home /> : <Login />} */}
       <Navbar />
+      {/* <Nav2 /> */}
       {/* <nav>
         <Link to="/">Home</Link>
         <Link to="/cart">Cart({quantities})</Link>
