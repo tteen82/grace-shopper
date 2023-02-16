@@ -41,6 +41,7 @@ app.put('/:id', async (req, res, next) => {
     await User.update(req.body, { where: { id: req.params.id } });
     res.send(await User.findByPk(req.params.id, { include: [Orders] }));
   } catch (error) {
+    console.log('Could not update the user ', error);
     next(error);
   }
 });

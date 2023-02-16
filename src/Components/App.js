@@ -6,40 +6,45 @@ import Login from './Login';
 import Products from './Products';
 import { useSelector, useDispatch } from 'react-redux';
 import { loginWithToken, fetchCart } from '../store';
+import Account from './Account';
+import Navbar from './Navbar';
 
 import { Link, Switch, Route } from 'react-router-dom';
 
 const App = () => {
-  const { auth, cart } = useSelector((state) => state);
-  cart.lineItems = cart.lineItems || [];
-  let quantities = cart.lineItems
-    .map((item) => item.quantity)
-    .reduce((a, b) => a + b, 0);
+  // const { auth, cart } = useSelector((state) => state);
+  // cart.lineItems = cart.lineItems || [];
+  // let quantities = cart.lineItems
+  //   .map((item) => item.quantity)
+  //   .reduce((a, b) => a + b, 0);
 
-  const dispatch = useDispatch();
-  useEffect(() => {
-    dispatch(loginWithToken());
-  }, []);
+  // const dispatch = useDispatch();
+  // useEffect(() => {
+  //   dispatch(loginWithToken());
+  // }, []);
 
-  useEffect(() => {
-    if (auth.id) {
-      dispatch(fetchCart());
-    }
-  }, [auth]);
+  // useEffect(() => {
+  //   if (auth.id) {
+  //     dispatch(fetchCart());
+  //   }
+  // }, [auth]);
   return (
     <div>
-      <h1>Acme Shopping</h1>
-      <nav>
+      {/* <h1>Acme Shopping</h1> */}
+      {/* {auth.id ? <Home /> : <Login />} */}
+      <Navbar />
+      {/* <nav>
         <Link to="/">Home</Link>
         <Link to="/cart">Cart({quantities})</Link>
-      </nav>
-      {auth.id ? <Home /> : <Login />}
+        <Link to="/account/:id">Account</Link>
+      </nav> */}
       {/* {!!auth.id && ( */}
       <div>
         <Switch>
           <Route exact path="/" component={Products} />
           <Route path="/products/:id" component={Product} />
           <Route path="/cart" component={Cart} />
+          <Route path="/account/:id" component={Account} />
         </Switch>
       </div>
       {/* )} */}

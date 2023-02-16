@@ -3,14 +3,9 @@ import { useSelector, useDispatch } from 'react-redux';
 import { logout, emptyCart } from '../store';
 import Products from './Products';
 import Login from './Login';
+import { Link } from 'react-router-dom';
 
-const Home = () => {
-  const { auth } = useSelector((state) => state);
-  const dispatch = useDispatch();
-  return (
-    <div>
-      {auth.id ? (
-        <div>
+/*
           <div>
             Welcome {auth.username}!!
             <button
@@ -22,6 +17,21 @@ const Home = () => {
               Logout
             </button>
           </div>
+*/
+
+
+const Home = () => {
+  const { auth } = useSelector((state) => state);
+  const dispatch = useDispatch();
+  return (
+    <div>
+      {auth.id ? (
+        <div>
+
+          <Link to="/account/:id">{auth.username.toUpperCase()}</Link>
+
+          <button onClick={() => dispatch(logout())}>Logout</button>
+
         </div>
       ) : (
         <Login />
