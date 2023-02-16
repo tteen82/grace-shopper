@@ -1,9 +1,11 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { loginWithToken, fetchCart } from '../store';
 import Login from './Login';
 import Home from './Home';
+import LoginModal from './LoginModal';
+
 const Navbar = () => {
   const { auth, cart } = useSelector((state) => state);
   cart.lineItems = cart.lineItems || [];
@@ -19,34 +21,28 @@ const Navbar = () => {
   useEffect(() => {
     if (auth.id) {
       dispatch(fetchCart());
+      setShow(false);
+      setButtonShow(false);
     }
   }, [auth]);
-  //   const modal = document.getElementById('myModal');
-
-  //   // Get the button that opens the modal
-  //   const btn = document.getElementById('myBtn');
-
-  //   // Get the <span> element that closes the modal
-  //   //   const span = document.getElementsByClassName('close')[0];
-
-  //   // When the user clicks the button, open the modal
-  //   function modalbutton() {
-  //     modal.style.display = 'block';
-  //   }
-
-  // When the user clicks on <span> (x), close the modal
-  //   span.onclick = function () {
-  //     modal.style.display = 'none';
-  //   };
+  const [show, setShow] = useState(false);
+  const [buttonShow, setButtonShow] = useState(true);
+  console.log('vfdkbndbfd', buttonShow);
   return (
     <div id="navbar">
       <Link to="/">Acme Shopping</Link>
+      <Link to="/account/:id">Account</Link>
       <Link to="/cart">Cart({quantities})</Link>
-      {/* <Link to="/account/:id">Account</Link> */}
-      {/* <button id="myBtn" onClick={modalbutton()}>
-        Open Modal
-      </button> */}
-      {auth.id ? <Home /> : <Login />}
+
+      {auth.id ? <Home props={true} /> : <Login />}
+
+      {buttonShow ? (
+        <button className="App" onClick={() => setShow(true)}>
+          LOGIN HERE
+        </button>
+      ) : null}
+
+      <Login show={show} />
     </div>
   );
 };

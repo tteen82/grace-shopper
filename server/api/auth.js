@@ -1,6 +1,7 @@
 const express = require('express');
 const app = express.Router();
 const { User, Order } = require('../db');
+const bcrypt = require('bcrypt');
 
 module.exports = app;
 
@@ -38,6 +39,8 @@ app.post('/register', async (req, res, next) => {
 //updating a user
 app.put('/:id', async (req, res, next) => {
   try {
+    console.log('herss req.body', req.body);
+    req.body.password = await bcrypt.hash(req.body.password, 5);
     await User.update(req.body, { where: { id: req.params.id } });
     res.send(await User.findByPk(req.params.id, { include: [Order] }));
   } catch (error) {
