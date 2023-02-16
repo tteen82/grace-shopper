@@ -75,3 +75,7 @@ nav {
 .singleImage {
   width: 300px;
 }
+
+#orderForm {
+  box-shadow: 0 3px 5px;
+}
