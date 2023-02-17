@@ -3,6 +3,7 @@ import { attemptLogin } from '../store';
 import { useDispatch } from 'react-redux';
 
 const Login = (props) => {
+  console.log('login props', props);
   const dispatch = useDispatch();
   const [credentials, setCredentials] = useState({
     username: '',
@@ -39,7 +40,7 @@ const Login = (props) => {
             onChange={onChange}
           />
           <button onClick={props.onClose}>Login</button>
-          <button className="button"> CLoSe</button>
+          {/* <button className="button"> CLoSe</button> */}
         </form>
       </div>
     </div>
