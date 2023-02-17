@@ -59,6 +59,7 @@ nav {
   justify-content: space-around;
   padding: 2rem;
 }
+
 #singleProduct {
   display: flex;
   flex-direction: column;
@@ -69,10 +70,11 @@ nav {
   width: 300px;
 }
 
+ul {
+  list-style-type: none;
+  }
+
 #orderForm {
   box-shadow: 0 3px 5px;
 }
 
-#userInfo {
-  box-shadow: 0 3px 5px;
-}

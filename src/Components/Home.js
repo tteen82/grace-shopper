@@ -28,8 +28,10 @@ const Home = (props) => {
       {auth.id ? (
         <div>
           <Link to="/account/:id">{auth.username.toUpperCase()}</Link>
+
           <button onClick={() => props.logout()}>Logout</button>
           {/* onClick={() => setShow(true)} */}
+
         </div>
       ) : (
         <Login />

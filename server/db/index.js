@@ -114,13 +114,13 @@ const syncAndSeed = async () => {
   await doug.addToCart({ product: sel70200, quantity: 1 });
   Review.create({
     comment: 'I hate this product.  It is stupid.',
-    stars: '⭐️',
+    stars: 1,
     productId: a7rm5.id,
     userId: wonjun.id,
   }),
     Review.create({
       comment: 'Best camera ever!',
-      stars: '⭐️⭐️⭐️⭐️⭐️',
+      stars: 5,
       productId: sel2470.id,
       userId: doug.id,
     });
