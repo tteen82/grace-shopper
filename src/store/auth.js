@@ -32,8 +32,10 @@ export const loginWithToken = () => {
 };
 
 export const updateAuth = (id, data) => {
+  console.log('return data', data);
   return async (dispatch) => {
     const response = await axios.put(`/api/auth/${id}`, data);
+
     dispatch({ type: 'UPDATE_AUTH', auth: response.data });
   };
 };

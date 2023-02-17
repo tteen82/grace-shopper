@@ -19,7 +19,7 @@ import { Link } from 'react-router-dom';
           </div>
 */
 
-const Home = () => {
+const Home = (props) => {
   const { auth } = useSelector((state) => state);
   const dispatch = useDispatch();
   return (
@@ -27,7 +27,6 @@ const Home = () => {
       {auth.id ? (
         <div>
           <Link to="/account/:id">{auth.username.toUpperCase()}</Link>
-
           <button
             onClick={() => {
               dispatch(logout());
