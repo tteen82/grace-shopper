@@ -25,10 +25,10 @@ class Account extends React.Component {
     return (
       <div>
         <div>
-        <h2>User Information</h2>
-        <div>Name : {username}</div>
-        <div>password: {password}</div>
-        <hr></hr>
+          <h2>User Information</h2>
+          <div>Name : {username}</div>
+          <div>password: {password}</div>
+          <hr></hr>
         </div>
 
         <h2>Previous Orders</h2>
@@ -39,7 +39,9 @@ class Account extends React.Component {
             </div>
           );
         })}
-        <div><hr></hr></div>
+        <div>
+          <hr></hr>
+        </div>
         {isAdmin ? <div>ADMIN INFO HERE</div> : <div></div>}
         {/* <div id="test"> TEST DIV</div> */}
         <AccountForm />

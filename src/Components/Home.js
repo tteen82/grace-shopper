@@ -20,6 +20,7 @@ import { Link } from 'react-router-dom';
 */
 
 const Home = (props) => {
+  console.log('heresss props', props);
   const { auth } = useSelector((state) => state);
   const dispatch = useDispatch();
   return (
@@ -27,14 +28,10 @@ const Home = (props) => {
       {auth.id ? (
         <div>
           <Link to="/account/:id">{auth.username.toUpperCase()}</Link>
-          <button
-            onClick={() => {
-              dispatch(logout());
-              dispatch(emptyCart());
-            }}
-          >
-            Logout
-          </button>
+
+          <button onClick={() => props.logout()}>Logout</button>
+          {/* onClick={() => setShow(true)} */}
+
         </div>
       ) : (
         <Login />
