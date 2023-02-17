@@ -10,7 +10,16 @@ import Typography from '@mui/material/Typography';
 export default function ProductCard({ product, addToCart }) {
   const { name, imageUrl, price } = product;
   return (
-    <Card sx={{ maxWidth: 120 }}>
+    <Card
+      style={{
+        width: 150,
+        height: 350,
+        margin: 10,
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'space-between',
+      }}
+    >
       <CardMedia sx={{ height: 140 }} image={imageUrl} title={name} />
       <CardContent>
         <Typography gutterBottom variant="h8" component="div">
@@ -20,11 +29,22 @@ export default function ProductCard({ product, addToCart }) {
           ${price}
         </Typography>
       </CardContent>
-      <CardActions>
+      <CardActions
+        style={{
+          display: 'flex',
+          justifyContent: 'space-around',
+        }}
+      >
         <Link to={`/products/${product.id}`}>
-          <Button size="small">Detail</Button>
+          <Button variant="contained" size="small">
+            Detail
+          </Button>
         </Link>
-        <Button size="small" onClick={() => addToCart(product, 1)}>
+        <Button
+          variant="contained"
+          size="small"
+          onClick={() => addToCart(product, 1)}
+        >
           add
         </Button>
       </CardActions>

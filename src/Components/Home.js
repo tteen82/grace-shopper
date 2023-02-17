@@ -27,8 +27,14 @@ const Home = (props) => {
       {auth.id ? (
         <div>
           <Link to="/account/:id">{auth.username.toUpperCase()}</Link>
-
-          <button onClick={() => dispatch(logout())}>Logout</button>
+          <button
+            onClick={() => {
+              dispatch(logout());
+              dispatch(emptyCart());
+            }}
+          >
+            Logout
+          </button>
         </div>
       ) : (
         <Login />

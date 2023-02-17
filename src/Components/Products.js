@@ -5,7 +5,6 @@ import { Link } from 'react-router-dom';
 import ProductCard from './ProductCards';
 import { setProducts, addToCart } from '../store';
 
-
 class Products extends React.Component {
   componentDidMount() {
     this.props.setProducts();
@@ -18,11 +17,11 @@ class Products extends React.Component {
     return (
       <div id="products">
         {allProducts.map((product) => (
-
-          <div key={product.id}>
-            <ProductCard product={product} addToCart={addToCart} />
-
-          </div>
+          <ProductCard
+            product={product}
+            addToCart={addToCart}
+            key={product.id}
+          />
         ))}
       </div>
     );

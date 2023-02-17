@@ -41,7 +41,7 @@ const App = () => {
         <Link to="/account/:id">Account</Link>
       </nav> */}
       {/* {!!auth.id && ( */}
-      <div>
+      <div id="body">
         <Switch>
           <Route exact path="/" component={Products} />
           <Route path="/products/:id" component={Product} />

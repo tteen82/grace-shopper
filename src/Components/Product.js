@@ -8,6 +8,8 @@ import ReviewForm from './ReviewForm';
 import { singleProduct } from '../store';
 import { useSelector, useDispatch } from 'react-redux';
 import { useParams } from 'react-router-dom';
+import Paper from '@mui/material/Paper';
+import Box from '@mui/material/Box';
 
 class Product extends React.Component {
   constructor() {
@@ -20,13 +22,47 @@ class Product extends React.Component {
     const { id, name, price, imageUrl, details } =
       this.props.products.singleProduct;
     return (
-      <div id="singleProduct">
-        <h1>{name}</h1>
-        <p>Price: ${price}</p>
-        <img src={imageUrl} className="singleImage" />
-        <p>Description: {details}</p>
-        <ReviewForm id={this.props.match.params.id} />
-      </div>
+      <Box>
+        <Paper
+          style={{
+            margin: 'auto',
+            marginBottom: 30,
+            width: '60%',
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+            justifyContent: 'space-between',
+          }}
+          variant="outlined"
+        >
+          <h1>{name}</h1>
+          <p> ${price}</p>
+          <img src={imageUrl} className="singleImage" />
+          <Paper
+            style={{
+              width: '80%',
+              margin: 15,
+              padding: 15,
+            }}
+            elevation={3}
+          >
+            {details}
+          </Paper>
+        </Paper>
+        <Paper
+          style={{
+            margin: 'auto',
+            width: '60%',
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+            justifyContent: 'space-between',
+          }}
+          variant="outlined"
+        >
+          <ReviewForm id={this.props.match.params.id} />
+        </Paper>
+      </Box>
     );
   }
 }
