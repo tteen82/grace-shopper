@@ -2,11 +2,10 @@ import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { loginWithToken, fetchCart } from '../store';
-import { logout, emptyCart } from '../store';
+import { logout } from '../store';
 
 import Login from './Login';
 import Home from './Home';
-import LoginModal from './LoginModal';
 
 const Navbar = () => {
   const { auth, cart } = useSelector((state) => state);
@@ -29,7 +28,6 @@ const Navbar = () => {
   }, [auth]);
   const [show, setShow] = useState(false);
   const [buttonShow, setButtonShow] = useState(true);
-  console.log('vfdkbndbfd', buttonShow);
   const logoutUser = () => {
     setButtonShow(true);
     dispatch(logout());
@@ -44,15 +42,11 @@ const Navbar = () => {
         }}
         to="/"
       >
-        Acme Shopping
+        CameraShop
       </Link>
-      {/* <Link style={{ textDecoration: 'none' }} to="/account/:id">
-        Account
-      </Link> */}
       <Link style={{ textDecoration: 'none' }} to="/cart">
         Cart({quantities})
       </Link>
-
       {auth.id ? (
         <Home buttonShow={buttonShow} logout={logoutUser} />
       ) : (
@@ -65,8 +59,7 @@ const Navbar = () => {
         </button>
       ) : null}
 
-      <Login show={show} />
-      {/* <div className="text-3xl font-bold underline"> HELLOOO TESTING</div> */}
+      <Login show={show} setShow={setShow} />
     </div>
   );
 };

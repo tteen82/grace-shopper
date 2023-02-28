@@ -1,48 +1,32 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { logout, emptyCart } from '../store';
-import Products from './Products';
+import { emptyCart } from '../store';
 import Login from './Login';
 import { Link } from 'react-router-dom';
 
-/*
-          <div>
-            Welcome {auth.username}!!
-            <button
-              onClick={() => {
-                dispatch(logout());
-                dispatch(emptyCart());
-              }}
-            >
-              Logout
-            </button>
-          </div>
-*/
-
 const Home = (props) => {
-  console.log('heresss props', props);
   const { auth } = useSelector((state) => state);
   const dispatch = useDispatch();
+  const empty = () => {
+    dispatch(emptyCart());
+  };
   return (
     <div>
       {auth.id ? (
         <div>
           <Link to="/account/:id">{auth.username.toUpperCase()}</Link>
-
-          <button onClick={() => props.logout()}>Logout</button>
-          {/* onClick={() => setShow(true)} */}
-
+          <button
+            onClick={() => {
+              props.logout();
+              empty();
+            }}
+          >
+            Logout
+          </button>
         </div>
       ) : (
         <Login />
       )}
-      {/* <h1>Home</h1>
-      <div>
-        Welcome {auth.username}!!
-        <button onClick={() => dispatch(logout())}>Logout</button>
-      </div> */}
-
-      {/* <Products /> */}
     </div>
   );
 };

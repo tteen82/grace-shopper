@@ -3,7 +3,8 @@ import { attemptLogin } from '../store';
 import { useDispatch } from 'react-redux';
 
 const Login = (props) => {
-  console.log('login props', props);
+  let show = props.show;
+  let setShow = props.setShow;
   const dispatch = useDispatch();
   const [credentials, setCredentials] = useState({
     username: '',
@@ -18,31 +19,38 @@ const Login = (props) => {
     ev.preventDefault();
     dispatch(attemptLogin(credentials));
   };
-  if (!props.show) {
-    return null;
-  }
   return (
     <div className="modal">
-      {' '}
-      <div className="modal-content">
-        <h2>Login</h2>
-        <form onSubmit={login}>
-          <input
-            placeholder="username"
-            value={credentials.username}
-            name="username"
-            onChange={onChange}
-          />
-          <input
-            placeholder="password"
-            name="password"
-            value={credentials.password}
-            onChange={onChange}
-          />
-          <button onClick={props.onClose}>Login</button>
-          {/* <button className="button"> CLoSe</button> */}
-        </form>
-      </div>
+      {show ? (
+        <div className="modal-content">
+          <h2>Login</h2>
+          <button
+            onClick={(e) => {
+              e.preventDefault();
+              setShow(false);
+            }}
+          >
+            x
+          </button>
+          <form onSubmit={login}>
+            <input
+              placeholder="username"
+              value={credentials.username}
+              name="username"
+              onChange={onChange}
+            />
+            <input
+              placeholder="password"
+              name="password"
+              value={credentials.password}
+              onChange={onChange}
+            />
+            <button onClick={props.onClose}>Login</button>
+          </form>
+        </div>
+      ) : (
+        ''
+      )}
     </div>
   );
 };

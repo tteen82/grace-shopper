@@ -43,7 +43,6 @@ class Account extends React.Component {
           <hr></hr>
         </div>
         {isAdmin ? <div>ADMIN INFO HERE</div> : <div></div>}
-        {/* <div id="test"> TEST DIV</div> */}
         <AccountForm />
       </div>
     );

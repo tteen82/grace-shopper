@@ -15,12 +15,6 @@ class AccountForm extends React.Component {
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleChange = this.handleChange.bind(this);
   }
-  // updateAuth = () => {
-  //   this.props.updateAuth({
-  //     this.props
-  //   })
-  // };
-
   handleSubmit(evt) {
     evt.preventDefault();
     this.props.updateAuth(this.props.auth.id, this.state);
@@ -33,34 +27,32 @@ class AccountForm extends React.Component {
     return (
       <div>
         <h2>Update Your Information</h2>
-          <Box
+        <Box
           component="form"
           sx={{
-          '& .MuiTextField-root': { m: 1, width: '25ch' },
+            '& .MuiTextField-root': { m: 1, width: '25ch' },
           }}
           noValidate
           autoComplete="off"
-          >
-        <form onSubmit={handleSubmit}>
-          {/* <label htmlFor="username">username:</label>
-          <input
-            name="username"
-            value={this.state.username}
-            onChange={handleChange}
-          />
-          <label htmlFor="password">password:</label>
-          <input
-            name="password"
-            value={this.state.password}
-            onChange={handleChange}
-          />
-          <button type="submit">Submit</button>
-        </form> */}
-          <TextField label="username" value={this.state.username} name="username" onChange={handleChange} />
-          <TextField label="password" value={this.state.password} name="password" onChange={handleChange} />
-        </form>
+        >
+          <form onSubmit={handleSubmit}>
+            <TextField
+              label="username"
+              value={this.state.username}
+              name="username"
+              onChange={handleChange}
+            />
+            <TextField
+              label="password"
+              value={this.state.password}
+              name="password"
+              onChange={handleChange}
+            />
+          </form>
         </Box>
-        <Button variant="contained" onClick={handleSubmit}>Submit</Button>
+        <Button variant="contained" onClick={handleSubmit}>
+          Submit
+        </Button>
       </div>
     );
   }
